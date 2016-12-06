@@ -6,9 +6,6 @@
 #Install Homebrew Cask extension
 brew tap caskroom/cask
 
-#Install Git via Homebrew
-brew install git
-
 #Install tmux via Homebrew
 brew install tmux
 
@@ -50,3 +47,12 @@ brew cask install league-of-legends
 
 #Install Dolphin via Homebrew-Cask
 brew cask install Dolphin
+
+#Install Git via Homebrew if doesn't exist
+EXISTS= "type git"
+
+if [[ $EXISTS == *"not found"*]]; then
+       	brew install git
+fi
+
+echo "Installation package complete"
