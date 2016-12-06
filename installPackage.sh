@@ -27,3 +27,9 @@ brew cask install textmate
 #Install Vuze via Homebrew-Cask
 brew cask install vuze
 
+#Install Python via Homebrew
+brew install python
+
+#Install Python3 via Homebrew
+brew install python3
+
