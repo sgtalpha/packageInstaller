@@ -8,25 +8,22 @@ Created this project so that I can easily install my favorite applications in on
 
 Installation
 
-***
-
-==========================================
-| Packages installed through this script |
-==========================================
-Homebrew
-Cask
-git (if you manually downloaded the script / did not already install git)
-Tmux
-nmap
-The Unarchiver
-Spotify
-Textmate
-Vuze
-Python
-Python3
-Handbreak
-Slack
-VLC
-Minecraft
-League of Legends
-Dolphin
+Packages installed through this script 
+======================================
+Homebrew<br>
+Cask<br>
+git (if you manually downloaded the script / did not already install git)<br>
+Tmux<br>
+nmap<br>
+The Unarchiver<br>
+Spotify<br>
+Textmate<br>
+Vuze<br>
+Python<br>
+Python3<br>
+Handbreak<br>
+Slack<br>
+VLC<br>
+Minecraft<br>
+League of Legends<br>
+Dolphin<br>
