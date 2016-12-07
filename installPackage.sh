@@ -65,3 +65,9 @@ brew cask install league-of-legends
 
 #Install Dolphin via Homebrew-Cask
 brew cask install Dolphin
+
+#Install Discord via Homebrew-Cask
+brew cask install discord
+
+#Install NameChanger via Homebrew-Cask
+brew cask install namechanger
