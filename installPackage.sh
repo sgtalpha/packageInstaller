@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 ##################################
 ######## HOMEBREW SECTION ########
@@ -7,14 +7,17 @@
 #Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-#Install Git via Homebrew if doesn't exis
-EXISTS='type git'
+#Install Git via Homebrew if doesn't exist
+INPUT="git"
+ 
+EXISTS="$(which $INPUT)"
+echo "${EXISTS}"
+#DONE!! -- Replace [[ with 'if test' so that this works with shell as well. (see posix comliance - [[ works with bash, but not shell)
 
-if [ "$EXISTS" == *'not found'* ] ; then
-        brew install git
-        echo "Git successfully installed"
+if test "$(echo $EXISTS | grep -o $INPUT)" = "$INPUT" ; then
+        echo "$INPUT is already installed. Skipping..."
 else
-        echo "Git is already installed. Skipping..."
+        echo "Installing $INPUT..."
 fi
 
 #Install tmux via Homebrew
