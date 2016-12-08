@@ -11,8 +11,6 @@
 INPUT="git"
  
 EXISTS="$(which $INPUT)"
-echo "${EXISTS}"
-#DONE!! -- Replace [[ with 'if test' so that this works with shell as well. (see posix comliance - [[ works with bash, but not shell)
 
 if test "$(echo $EXISTS | grep -o $INPUT)" = "$INPUT" ; then
         echo "$INPUT is already installed. Skipping..."
@@ -68,3 +66,9 @@ brew cask install league-of-legends
 
 #Install Dolphin via Homebrew-Cask
 brew cask install Dolphin
+
+#Install Discord via Homebrew-Cask
+brew cask install discord
+
+#Install NameChanger via Homebrew-Cask
+brew cask install namechanger
