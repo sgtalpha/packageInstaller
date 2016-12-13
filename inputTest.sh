@@ -1,9 +1,31 @@
 #!/usr/bin/env sh
 
-echo "Type the FULL path to the file that lists your desired programs, then press [enter]: "
-read INPUT_FILE
+#Add variables to the command / check for variables
+if test $# -lt 1; then
+	echo "You must include an input file. Use -h for help."
+	exit 0
+else
+	while test $# -gt 0; do
+		case "$1" in
+			-h|--help)
+				echo "options:"
+				echo "-h, --help		show brief help"
+				echo "-f [path], --file	[path]	provide path to input file. Note: Must be FULL path."
+				exit 0
+			;;
+			-f|--file)
+				INPUT_FILE=$(<$2)
+				shift 2
+			;;
+			*)
+				printf "Unexpected option $1.\nUse -h to see a list of accepted options.\n\n"
+				exit 0
+			;;
+		esac
+	done;
+fi
 
-INPUT_FILE=$(<$INPUT_FILE)
+#Check each program from the input file to see if it already exists. Skip if installed already.
 
 for INPUT in $INPUT_FILE; do
 	EXISTS="$(which $INPUT | tr '[:upper:]' '[:lower:]')"
@@ -26,18 +48,3 @@ for INPUT in $INPUT_FILE; do
 	#	echo "Installing $INPUT..."
 	fi
 done
-
-#do
-#	echo $EXISTS
-#done
-
-###	CHECK TO SEE IF ITEM IS BREW
-
-###	IF ITEM IS NOT BREW, CHECK TO SEE IF ITEM IS CASK
-
-
-#	if [ "$EXISTS" == *'not found'* ] ; then
-#        	echo "Git successfully installed"
-#	else
-#        	echo "Git is already installed. Skipping..."
-#	fi
