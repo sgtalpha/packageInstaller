@@ -14,7 +14,7 @@ else
 				exit 0
 			;;
 			-f|--file)
-				INPUT_FILE=$(<$2)
+				INPUT_FILE=$(tr ' ' '-' <$2)
 				shift 2
 			;;
 			*)
@@ -28,7 +28,7 @@ fi
 #Install Homebrew if it doesn't exist.
 
 BREW="$(which brew)"
-CASK="$(ls /usr/local/Caskroom)"
+CASK="$(ls /usr/local/Caskroom 2>/dev/null)"
 
 if test "$(echo $BREW | grep -o brew)" = "brew" ; then
 	printf "Homebrew is alreaedy installed. Checking for cask... \n"
@@ -50,10 +50,12 @@ fi
 
 for INPUT in $INPUT_FILE; do
 	EXISTS="$(which $INPUT | tr '[:upper:]' '[:lower:]')"
-	MAC="$(find /Applications -iname *$INPUT* -maxdepth 1 | grep -io $INPUT | tr '[:upper:]' '[:lower:]')"
 	INPUT="$(echo $INPUT | tr '[:upper:]' '[:lower:]')"
+#Make checks OSX friendly...
+	OSX_INPUT="$(echo $INPUT | tr '-' ' ')"
+	OSX="$(find /Applications -iname "*$OSX_INPUT*" -maxdepth 1 | grep -m 1 -io "$OSX_INPUT" | tr "[:upper:]" "[:lower:]")"
 	
-	if test "$MAC" = "$INPUT" || test "$(echo $EXISTS | grep -io $INPUT)" ; then
+	if test "$OSX" = "$OSX_INPUT" || test "$(echo $EXISTS | grep -io $INPUT)" ; then
 		printf "$INPUT is already installed. Skipping... \n"
 	else
 #If it doesn't exist, see if it needs to be installed via Homebrew or Homebrew Cask; install it using appropriate method.  
