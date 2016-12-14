@@ -27,23 +27,24 @@ fi
 
 #Install Homebrew if it doesn't exist.
 
-BREW="$(which brew) | grep -o brew"
+BREW="$(which brew)"
 CASK="$(ls /usr/local/Caskroom)"
 
-if test "$BREW" = "brew" ; then
-	echo "Homebrew is alreaedy installed. Checking for cask..."
+if test "$(echo $BREW | grep -o brew)" = "brew" ; then
+	printf "Homebrew is alreaedy installed. Checking for cask... \n"
 else
-	echo "Installing Homebrew..."
+	printf "Installing Homebrew...\n"
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" &>/dev/null
 fi
 
 #Install Homebrew Cask if it doesn't exist.
 
 if test "${#CASK}" -gt 0 ; then
-	echo "Cask is already installed. Installing your apps..."
+	printf "Cask is already installed. Installing your apps... \n"
 else
-	echo "Installing Homebrew Cask... "
+	printf "Installing Homebrew Cask... \n"
 	brew tap caskroom/cask &>/dev/null
+fi
 
 #Check each program from the input file to see if it already exists. Skip if installed already.
 
@@ -53,18 +54,18 @@ for INPUT in $INPUT_FILE; do
 	INPUT="$(echo $INPUT | tr '[:upper:]' '[:lower:]')"
 	
 	if test "$MAC" = "$INPUT" || test "$(echo $EXISTS | grep -io $INPUT)" ; then
-		echo "$INPUT is already installed. Skipping...:"
+		printf "$INPUT is already installed. Skipping... \n"
 	else
 #If it doesn't exist, see if it needs to be installed via Homebrew or Homebrew Cask; install it using appropriate method.  
 		if test "$(brew cask search $INPUT | grep 'No Cask*')" ; then
 			if test "$(find $(brew --prefix)/Library/Formula/$INPUT.rb 2>/dev/null)" ; then
-				echo "Installing $INPUT via Homebrew..."
+				printf "Installing $INPUT via Homebrew... \n"
 				brew install $INPUT
 			else
-				echo "Homebrew cannot install $INPUT. Skipping..."
+				printf "Homebrew cannot install $INPUT. Skipping... \n"
 			fi
 		else 
-			echo "Installing $INPUT via cask..."
+			printf "Installing $INPUT via cask... \n"
 			brew cask install $INPUT
 		fi
 	fi
