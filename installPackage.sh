@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+if [[ $UID != 0 ]]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
 #Add variables to the command / check for variables
 if test $# -lt 1; then
 	echo "You must include an input file. Use -h for help."
@@ -31,7 +37,7 @@ BREW="$(which brew)"
 CASK="$(ls /usr/local/Caskroom 2>/dev/null)"
 
 if test "$(echo $BREW | grep -o brew)" = "brew" ; then
-	printf "Homebrew is alreaedy installed. Checking for cask... \n"
+	printf "Homebrew is already installed. Checking for cask... \n"
 else
 	printf "Installing Homebrew...\n"
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" &>/dev/null
