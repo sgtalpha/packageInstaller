@@ -20,11 +20,11 @@ Download the installPackage.sh script.
 
 2: Run the script with the following command, replacing the brackets with the full path to the txt file from step 1:<br>
 ```shell
-sh installPackage.sh -f [full/path/to/txt/file]
+sudo sh installPackage.sh -f [full/path/to/txt/file]
 ```
 Example: 
 ```shell
-sh installPackage.sh -f /Users/JohnDoe/Desktop/appList.txt
+sudo sh installPackage.sh -f /Users/JohnDoe/Desktop/appList.txt
 ```
 
 #### Options
