@@ -1,11 +1,5 @@
 #!/usr/bin/env sh
 
-if [[ $UID != 0 ]]; then
-    echo "Please run this script with sudo:"
-    echo "sudo $0 $*"
-    exit 1
-fi
-
 #Add variables to the command / check for variables
 if test $# -lt 1; then
 	echo "You must include an input file. Use -h for help."
